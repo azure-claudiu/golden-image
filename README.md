@@ -10,7 +10,7 @@ There are two templates that create a VM image in an Azure subscription. The VM 
 
 # Running Packer
 
-0. Install (Packer CLI)[https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli] and (Azure CLI)[https://learn.microsoft.com/en-us/cli/azure/install-azure-cli].
+0. Install [Packer CLI](https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli) and [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 
 1. Log into the Azure account:
 
