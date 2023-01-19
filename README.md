@@ -1,13 +1,22 @@
-Golden Image Pipeline
+Golden Image &#x1FA99; Pipeline
 ---------------------
 
 # Packer templates included
 
-There are different Packer templates that create a VM image in an Azure subscription. In all cases the VM is configured to have the nginx web server installed.
+There are different Packer templates that create a VM image in an Azure subscription. In all cases the VM is configured to have the nginx web server installed and running on port 80.
 
-* image1.pkr.hcl - uses a `shell` provisioner 
-* image2.pkr.hcl - uses a `shell` provisioner, and an `ansible-local` provisioner
-* image3.pkr.hcl - uses an `ansible` provisioner
+## T.1 - image1.pkr.hcl
+* uses a `shell` provisioner
+* is the simplest, because it does everything with commands run locally
+
+## T.2 - image2.pkr.hcl
+* uses a `shell` provisioner, and an `ansible-local` provisioner
+* the shell provisioner is needed to install Ansible locally, so that the `ansible-local` provisioner can later run successfully
+* a final shell provisioner can be used to uninstall Ansible
+
+## T.3 - image3.pkr.hcl
+* uses an `ansible` provisioner
+* Ansible has to be installed from the machine where Packer is run
 
 # Azure prerequisites
 
@@ -91,17 +100,25 @@ To create the VM, run the command below. Replace the placeholders first.
 az vm create -g <rg_name> --name <vm_name> --image <image_name> --admin-username azureuser --generate-ssh-keys
 ```
 
-## P.4 - Test the VM
-
-On the VM you just created, test connectivity to it, either by opening an SSH connection, or opening a port to validate the web server was installed correctly. Replace the placeholders first.
+You should get the public IP address of the VM from the output of the command above. If you lose this IP address, you can retrieve it with the command below. Replace the placeholders first.
 
 ```
-az vm open-port -g <rg_name> --name <vm_name> --port 80
-
 az vm show -g <rg_name> -n <vm_name> --query publicIps -d -o tsv
 ```
 
-Then a browser can be opened to the IP address listed with the command above.
+## P.4 - Test the VM
+
+On the VM you just created, test connectivity to it, by either:
+* opening an SSH connection to the public IP, or
+* opening a browser to its public IP (e.g. http://<public-ip>) to validate the web server was installed correctly
+
+To open access to port 80 on the VM, you can use the portal, or the script below. Replace the placeholders first.
+
+```
+az vm open-port -g <rg_name> --name <vm_name> --port 80
+```
+
+Then a browser can be opened to the public IP address listed in the section above.
 
 # References
 
