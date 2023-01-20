@@ -16,7 +16,8 @@ There are different Packer templates that create a VM image in an Azure subscrip
 
 ## T.3 - image3.pkr.hcl
 * uses an `ansible` provisioner
-* Ansible has to be installed from the machine where Packer is run
+* Ansible has to be installed on the machine where Packer is run
+* if encountering a 'failed to handshake' error while the Ansible playbook runs, see a fix in the references section.
 
 # Azure prerequisites
 
@@ -125,3 +126,6 @@ Then a browser can be opened to the public IP address listed in the section abov
 * [Shell provisioner](https://developer.hashicorp.com/packer/docs/provisioners/shell)
 * [Ansible (Local) provisioner](https://developer.hashicorp.com/packer/plugins/provisioners/ansible/ansible-local)
 * [Ansible (Remote) provisioner](https://developer.hashicorp.com/packer/plugins/provisioners/ansible/ansible)
+* [Building Linux images with Packer](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/build-image-with-packer)
+* [Building Windows images with Packer](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/build-image-with-packer)
+* [Fix for Ansible remote provisioner error](https://www.bojankomazec.com/2022/10/how-to-fix-ansible-error-failed-to.html)
